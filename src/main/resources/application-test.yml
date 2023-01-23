@@ -1,0 +1,23 @@
+#database: 2
+#  host: 192.168.1.187
+  #port: 6339
+
+  # 数据源
+  spring:
+    redis:
+      password:
+      host: 127.0.0.1
+      port: 6379
+
+    datasource:
+      type: com.zaxxer.hikari.HikariDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: eddie
+      password: 123456
+      url: jdbc:mysql://mysql:3306/booksys?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+
+  logging:
+    level:
+      com:
+        xhyc:
+          scheme: debug
