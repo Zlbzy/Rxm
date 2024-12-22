@@ -1,7 +1,7 @@
 package com.eddy.rxm.common.util;
 
 
-import com.eddy.rxm.common.exception.ResponseEnum;
+import com.eddy.rxm.common.core.exception.ResponseEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +20,11 @@ public class R<T> {
         this.code=responseEnum.getCode();
         this.message=responseEnum.getMessage();
         this.data=data;
+    }
+
+    public R(ResponseEnum responseEnum, String message){
+        this.code=responseEnum.getCode();
+        this.message=message;
     }
 
     public R(String code, String msg){

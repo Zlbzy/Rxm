@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eddy.rxm.admin.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.eddy.rxm.admin.entity.SysUser">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="email" property="email" />
+        <result column="phone" property="phone" />
+        <result column="create_time" property="createTime" />
+        <result column="create_by" property="createBy" />
+        <collection property="roleList" column="id" ofType="java.lang.Integer"
+                    select="com.eddy.rxm.admin.mapper.UserRoleMapper.selectRoleByUserId"></collection>
+    </resultMap>
+
+
+    <sql id="baseSql">
+        t.id,
+        t.username,
+        t.email,
+        t.phone,
+        t.create_time,
+        t.create_by
+    </sql>
+
+    <select id="selectUserById" resultMap="BaseResultMap">
+        select
+        <include refid="baseSql"/>
+        from sys_user t
+        where t.id = #{id};
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        select
+        <include refid="baseSql"/>
+        from sys_user t
+        <where>
+            t.del_flag=0
+            <if test="user.username != null and user.username != ''">
+                and t.username like concat("%", #{user.username},"%")
+            </if>
+        </where>
+
+    </select>
+
+
+</mapper>

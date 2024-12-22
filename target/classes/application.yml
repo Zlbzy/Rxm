@@ -1,13 +1,49 @@
-server:
-  port: 8082
-  servlet:
-    context-path: /rxm
-
-
 # 加解密根密码xxxxxx
 jasypt:
   encryptor:
     password: pig #根密码
+
+# spring security 配置
+#security:
+#  encode:
+#    # 前端密码密钥，必须16位
+#    key: 'thanks,pig4cloud'
+#  client:
+#    client-id: ENC(imENTO7M8bLO38LFSIxnzw==)
+#    client-secret: ENC(i3cDFhs26sa2Ucrfz2hnQw==)
+#    scope: server
+
+
+
+# 数据源
+spring:
+  application:
+    name: RxManager
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 10MB
+  messages:
+    basename: i18n/message_common
+    encoding: UTF-8
+
+  #设置超时时间半小时
+#  web:
+#    resources:
+#      static-locations: classpath:/static/,file:/Users/Eddy/images/
+  mvc:
+    async:
+      request-timeout: 1800000
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  security:
+    user:
+      name: admin
+      password: 123456
 
 
 # mybaits-plus配置
@@ -23,46 +59,8 @@ mybatis-plus:
       logic-not-delete-value: 0
   configuration:
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #开启sql日志
-# spring security 配置
-security:
-  encode:
-    # 前端密码密钥，必须16位
-    key: 'thanks,pig4cloud'
-  client:
-    client-id: ENC(imENTO7M8bLO38LFSIxnzw==)
-    client-secret: ENC(i3cDFhs26sa2Ucrfz2hnQw==)
-    scope: server
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #开启sql日志
 
-# 数据源
-spring:
-  application:
-    name: RxManager
-  main:
-    allow-bean-definition-overriding: true
-  profiles:
-    active: dev
-  servlet:
-    multipart:
-      max-request-size: 10MB
-      max-file-size: 10MB
-  messages:
-    basename: i18n/message_common
-    encoding: UTF-8
-  #    password: root  注意格式对齐，否则报错
-  #   url: jdbc:mysql://192.168.1.101:3306/xd?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
-  #设置超时时间半小时
-#  web:
-#    resources:
-#      static-locations: classpath:/static/,file:/Users/Eddy/images/
-  mvc:
-    async:
-      request-timeout: 1800000
-
-
-logging:
-  level:
-    org.springframework.security: debug
 
 # 直接放行URL
 ignore:
@@ -70,3 +68,4 @@ ignore:
     - /user/info/*
     - /**
     - /scenario/deploy/*
+    - /rxm/hello!

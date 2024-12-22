@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@DS("slave")
+@DS("master")
 @RequiredArgsConstructor
 @Service
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, SysMenu> implements MenuService {
