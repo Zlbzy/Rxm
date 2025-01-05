@@ -21,6 +21,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +46,11 @@ public class UserController {
     public R login(@RequestBody SysUser user){
         return loginService.login(user);
 //        return null;
+    }
+
+    @GetMapping("/logout")
+    public R logout(){
+        return loginService.logout();
     }
 
     @ApiOperation("新增用户")
@@ -85,7 +91,7 @@ public class UserController {
 
     }
 
-
+    @PreAuthorize("hasAuthority('test')")
     @ApiOperation("listUser")
     @GetMapping("/listAll")
     public R listAll(){

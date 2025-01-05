@@ -14,8 +14,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @TableName("sys_user")
-public class SysUser extends BaseEntity implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class SysUser extends BaseEntity {
+
 
     @ExcelProperty("名称")
     /* 用户名 */

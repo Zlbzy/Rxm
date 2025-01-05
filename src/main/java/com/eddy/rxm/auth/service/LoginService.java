@@ -6,4 +6,6 @@ import com.eddy.rxm.common.util.R;
 public interface LoginService {
 
     R login(SysUser sysUser);
+
+    R logout();
 }

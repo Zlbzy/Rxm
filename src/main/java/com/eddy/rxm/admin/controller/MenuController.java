@@ -36,7 +36,6 @@ public class MenuController {
     public R tree(){
 //        SysMenu sysMenu = menuService.getById("111");
         List<SysMenu> menuList = menuService.getMenu();
-        log.debug("abc123");
         List<TreeNode> menuTree = TreeUtils.buildByLoop(menuList, -1);
         return R.success(menuTree);
     }

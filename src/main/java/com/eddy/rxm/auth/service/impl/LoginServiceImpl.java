@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -42,5 +43,14 @@ public class LoginServiceImpl implements LoginService {
         Map<String, String> map = new HashMap<>();
         map.put("token", jwt);
         return R.success(map, "登录成功");
+    }
+
+    @Override
+    public R logout() {
+        Authentication authenticate = SecurityContextHolder.getContext().getAuthentication();
+        LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
+        Integer userId = loginUser.getUser().getId();
+        redisCache.deleteObject("login:" +userId);
+        return R.success("登出成功");
     }
 }
